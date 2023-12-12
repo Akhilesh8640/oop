@@ -1,0 +1,23 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main() {
+	map<string,long> StatePopulations;
+	StatePopulations["Maharashtra"]=1223455;
+	StatePopulations["Rajasthan"]=990000;
+	StatePopulations["Uttar Pradesh"]=1400039;
+
+	string statename;
+	cout<<"Enter State Name: ";
+	cin>>statename;
+	auto it = StatePopulations.find(statename);
+	if(it != StatePopulations.end()){
+		cout<<"State: "<<it->first<<" "<<"Population: "<<it->second;
+
+	}
+	else{
+		cout<<"State Not Found";
+	}
+	return 0;
+}
