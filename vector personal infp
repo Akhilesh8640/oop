@@ -1,0 +1,87 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+struct PersonalRecords{
+public:
+	string Name;
+	string DOB;
+	string phoneno;
+
+};
+	void displaydata(const PersonalRecords& record){
+		cout<<"Name: "<<record.Name<<"Date of Birth: "<<record.DOB<<"Phone NO: "<<record.phoneno<<endl;
+
+	}
+
+int main() {
+	vector<PersonalRecords> records;
+	int choice;
+	while(true){
+		cout<<"Personal Record System\n";
+		cout<<"1.Add Record\n";
+		cout<<"2.Display Records\n";
+		cout<<"3.Sort Records\n";
+		cout<<"4.Search In record\n";
+		cout<<"5.Exit\n";
+		cout<<"Enter Your Choice: \n";
+		cin>>choice;
+
+		switch(choice){
+		case 1:{
+			PersonalRecords record;
+			cout<<"Enter Name: ";
+			cin>>record.Name;
+			cout<<"Enter Date Of Birth: ";
+			cin>>record.DOB;
+			cout<<"Enter Phone NO: ";
+			cin>>record.phoneno;
+			records.push_back(record);
+			break;
+		}
+		case 2:{
+			for(const auto& record : records){
+				displaydata(record);
+			}
+			break;
+		}
+		case 3:{
+			sort(records.begin(),records.end(),[](const PersonalRecords& a,const PersonalRecords& b)
+            {
+				return a.Name < b.Name;
+			});
+			for(const auto& record : records){
+				displaydata(record);
+			}
+			break;
+
+		}
+		case 4:{
+			string searchname;
+			cout<<"Enter Name of the record to be searched: ";
+			cin>>searchname;
+			auto it =find_if(records.begin(),records.end(),[searchname](const PersonalRecords& record){
+				return record.Name == searchname;
+			});
+			if(it!=records.end()){
+				cout<<"Record Found\n";
+			}
+			else{
+				cout<<"Record Not Found\n";
+			}
+			break;
+		}
+		case 5:{
+			cout<<"Thank You!\n";
+			return 0;
+		}
+		default:{
+			cout<<"Invalid Choice Please try Again...\n";
+			break;
+		}
+	  }
+	}
+
+
+	return 0;
+}
