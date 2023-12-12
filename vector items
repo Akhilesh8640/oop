@@ -1,0 +1,92 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+struct Item {
+    string itemcode;
+    string name;
+    int cost;
+    int qty;
+};
+
+void displaydata(const Item& item) {
+    cout << "Item Code:\n " << item.itemcode << " Name:\n " << item.name << " Cost:\n " << item.cost << " Quantity:\n " << item.qty << endl;
+}
+
+int main() {
+    vector<Item> items;
+    char choice;
+
+    while (true) {
+        cout << "1. Add Record\n";
+        cout << "2. Display Records\n";
+        cout << "3. Sort Records\n";
+        cout << "4.Search for a item\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case '1': {
+                Item item;
+                cout << "Enter Item Code: ";
+                cin >> item.itemcode;
+                cout << "Enter Name: ";
+                cin >> item.name;
+                cout << "Enter Cost: ";
+                cin >> item.cost;
+                cout << "Enter Quantity: ";
+                cin >> item.qty;
+                items.push_back(item);
+                break;
+            }
+
+            case '2': {
+                for (const auto& item : items) {
+                    displaydata(item);
+                }
+                break;
+            }
+
+            case '3': {
+                sort(items.begin(), items.end(), [](const Item& a, const Item& b) {
+                    return a.itemcode < b.itemcode;
+                });
+                cout << "Sorted Data: \n";
+                for (const auto& item : items) {
+                    displaydata(item);
+                }
+                break;
+            }
+
+            case '4':{
+            	string key_value;
+            	cout<<"Enter Name of Item to be searched";
+            	cin>>key_value;
+            	auto it =find_if(items.begin(),items.end(),[key_value](const Item& item){
+            		return item.name == key_value;
+            	});
+            	if(it != items.end()){
+            		cout<<"Record found\n";
+            	}
+            	else{
+            		cout<<"Record not found\n";
+            	}
+            	break;
+        }
+
+            case '5': {
+                cout << "Thank you!!\n";
+                return 0;
+            }
+
+            default: {
+                cout << "Invalid Choice. Please Try again\n";
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
