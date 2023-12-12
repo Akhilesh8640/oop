@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+class Complex
+{
+public:
+    int real;
+    int img;
+
+    Complex(){
+        real=0;
+        img=0;
+    }
+    Complex(int a,int b){
+        a=real;
+        b=img;
+    }
+    
+    void display()
+    {
+        cout<<"the complex no is:";
+        cout<<real<<"+ i"<<img<<endl;
+    }
+
+};
+    Complex operator+(const Complex& c1, const Complex& c2){
+            Complex temp;
+            temp.real=c1.real + c2.real;
+            temp.img=c1.img + c2.img;
+            return temp;
+    }
+     Complex operator-(const Complex& c1,const Complex& c2){
+        Complex temp;
+        temp.real=c1.real - c2.real;
+        temp.img=c1.img - c2.img;
+        return temp;
+     }
+     Complex operator*(const Complex& c1, const Complex& c2 ){
+        Complex temp;
+        temp.real=(c1.real * c2.real)-(c1.img + c2.img);
+        temp.img=(c1.real * c2.img)+(c1.img * c2.real);
+        return temp;
+     }
+
+     ostream& operator<<(ostream& COUT, Complex c1){
+        COUT<<c1.real<<" + "<<c1.img<<endl;
+     }
+int main()
+{
+    Complex z1, z2(2,8);
+    z1.real=5;
+    z1.img=2;
+    Complex z3= z1+ z2;
+    Complex z4=z1-z2;
+    Complex z5=z1*z2;
+    z1.display();
+    z2.display();
+    z3.display();
+    z4.display();
+    z5.display();
+    return 0;
+}   
