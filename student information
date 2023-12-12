@@ -1,0 +1,84 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Student{
+	private:
+		string name;
+		string dob;
+		string bg;
+		int height;
+		int weight;
+		string ipno;
+		string address;
+		string phoneno;
+		string licenseno;
+
+		static int studentcount;
+	public:
+		Student();
+		Student(const string& n, const string& birth, const string& blood,const int& h, 
+        const int& w,const string& ipn, const string& add, const string& pno, const string& lno);
+		Student(const Student& other);
+		~Student();
+		static int getstudentcount();
+		void display();
+		static void displaycount();
+
+		friend class StudentHelper;
+	};
+int Student::studentcount = 0;
+
+class StudentHelper{
+public:
+	static void displaycount(){
+		cout<<"Total Students: "<<Student::getstudentcount()<<endl;
+	}
+};
+
+Student::Student():height(0), weight(0){
+	studentcount++;
+}
+
+Student::Student(const string& n, const string& birth, const string& blood,
+const int& h, const int& w,const string& ipn, const string& add, 
+const string& pno, const string& lno):name(n),dob(birth),bg(blood),
+height(h),weight(w),ipno(ipn),address(add),phoneno(pno),licenseno(lno){
+	studentcount++;
+}
+Student::Student(const Student& other):name(other.name),dob(other.dob),
+bg(other.bg),height(other.height),weight(other.weight),ipno(other.ipno),
+address(other.address),phoneno(other.phoneno),licenseno(other.licenseno){
+	studentcount++;
+}
+
+Student::~Student(){
+	studentcount--;
+}
+void Student::display(){
+	
+	cout<<"Name: "<<name<<endl;
+	cout<<"Date of Birth: "<<dob<<endl;
+	cout<<"Blood Group: "<<bg<<endl;
+	cout<<"Height: "<<height<<"CMS"<<endl;
+	cout<<"Weight: "<<weight<<"KGS"<<endl;
+	cout<<"Insurance Policy NO: "<<ipno<<endl;
+	cout<<"Phone NO: "<<phoneno<<endl;
+	cout<<"Contact Address: "<<address<<endl;
+	cout<<"License NO: \n"<<licenseno<<endl;
+	
+}
+int Student::getstudentcount(){
+	return studentcount;
+}
+int main() {
+	Student s1();
+	Student s2("Swayam","04/04/2004","O+",164,58,"ABC1234","7559480829","MITHILA-M707","XYZ1234" );
+   
+	Student s3(s2);
+	s2.display();
+     cout<<"\n"<<endl;
+	s3.display();
+	StudentHelper::displaycount();
+	return 0;
+}
