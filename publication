@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+class Publication{
+public:
+	string Title;
+	float Price;
+	Publication(const string& t,float p):Title(t),Price(p){}
+};
+class Book:public Publication{
+public:
+	int PageCount;
+	Book(const string& t,float p,int pc):Publication(t,p),PageCount(pc){}
+};
+class Tape:public Publication{
+public:
+	float PlayTime;
+	Tape(const string& t,float p,float pt):Publication(t,p),PlayTime(pt){}
+};
+int main() {
+	try{
+		string book_title, tape_title;
+		float book_price, tape_price;
+		int book_pagecount;
+		float tape_playtime;
+
+		cout<<"Enter Title of Book: \n";
+		cin>>book_title;
+		cout<<"Enter price of the Book: \n";
+		cin>>book_price;
+		cout<<"Enter Page Count of Book: \n";
+		cin>>book_pagecount;
+		cout<<"Enter Title of Tape: \n";
+		cin>>tape_title;
+		cout<<"Enter price of Tape: \n";
+		cin>>tape_price;
+		cout<<"Enter Play Time of Tape(in minutes): \n";
+		cin>>tape_playtime;
+
+		Book book(book_title,book_price,book_pagecount);
+		Tape tape(tape_title,tape_price,tape_playtime);
+
+		
+		cout<<"Title: "<<book.Title<<endl;
+		cout<<"Price: "<<book.Price<<" Rs."<<endl;
+		cout<<"Page Count: "<<book.PageCount<<" Pages"<<endl;
+		
+		cout<<"Title: "<<tape.Title<<endl;
+		cout<<"Price: "<<tape.Price<<" Rs."<<endl;
+		cout<<"Play Time(in minutes): "<<tape.PlayTime<<" minutes"<<endl;
+	} catch (const exception &e) {
+		cout<<"Error was Caught....Please try again";
+
+		Book book("",0.0,0);
+		Tape tape("",0.0,0.0);
+		cout<<"Title: "<<book.Title<<endl;
+		cout<<"Price: "<<book.Price<<" Rs."<<endl;
+		cout<<"Page Count: "<<book.PageCount<<" Pages"<<endl;
+		cout<<"Title: "<<tape.Title<<endl;
+		cout<<"Price: "<<tape.Price<<" Rs."<<endl;
+		cout<<"Play Time(in minutes): "<<tape.PlayTime<<" minutes"<<endl;
+		;
+	}
+
+	return 0;
+}
