@@ -44,6 +44,15 @@ public:
      ostream& operator<<(ostream& COUT, Complex c1){
         COUT<<c1.real<<" + "<<c1.img<<endl;
      }
+
+    istream & operator >> (istream& CIN,  Complex &c2)
+    {
+        cout << "Enter Real Part ";
+        CIN >> c2.real;
+        cout << "Enter Imaginary Part ";
+        CIN >> c2.img;
+        return CIN;
+    }
 int main()
 {
     Complex z1, z2(2,8);
